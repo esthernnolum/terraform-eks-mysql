@@ -57,12 +57,12 @@ terraform apply
 Terraform will present the modifications that are set to be applied to your AWS cloud infrastructure. To proceed and apply these changes, simply type "yes" and hit Enter. You can also employ the AWS CLI or utilize the AWS Management Console to confirm that the resources have been created as intended.
 
 # Assumptions
-Proficiency in Linux, Terraform commands, GitOps, and DevOps practices.
-Git, terraform and aws cli already installed on client device
-Aws cli configured with default region set to us-east-1
+1. Proficiency in Linux, Terraform commands, GitOps, and DevOps practices.
+2. Git, terraform and aws cli already installed on client device
+3. Aws cli configured with default region set to us-east-1
 
 # Considerations Made
 
-The Principle of Least Privilege has been taken into account when defining the policies for the IAM role assigned to the cluster.
-Public access to the MySQL database has been turned off.
-To ensure both high availability and fault tolerance, instances have been duplicated across multiple availability zones (us-east-1a, us-east-1b, us-east-1c) within the same region.
+1. The Principle of Least Privilege has been taken into account when defining the policies for the IAM role assigned to the cluster.
+2. Public access to the MySQL database has been turned off.
+3. To ensure both high availability and fault tolerance, instances have been duplicated across multiple availability zones (us-east-1a, us-east-1b, us-east-1c) within the same region.

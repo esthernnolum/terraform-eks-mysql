@@ -12,3 +12,6 @@ variable "mydbinstance_password" {
   description = "The password for the RDS MySQL database."
   default     = "admin" # input your password here
 }
+variable "db-sg-id" {
+  type = any
+}

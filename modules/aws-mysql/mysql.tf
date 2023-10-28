@@ -6,7 +6,7 @@ resource "aws_db_instance" "mydb_instance" {
   allocated_storage      = 20
   username               = var.mydbinstance_username
   password               = var.mydbinstance_password
+  vpc_security_group_ids = var.db-sg-id
   publicly_accessible    = false
   skip_final_snapshot    = true
 }
- 

@@ -4,31 +4,40 @@
 
 ![alt text](https://github.com/esthernnolum/terraform-eks-mysql/blob/main/infra-diagram.png?raw=true)
 
+1. GitHub: hosting our terraform files.
+
+2. Linux server is essential for setting up the infrastructure as code and should meet the prerequisites: Git, Terraform, and AWS CLI need to be installed on it.
+
+3. Terraform plays a central role as our infrastructure-as-code tool, allowing us to provision the necessary infrastructure on the cloud through code.
+
+4. The AWS Cloud platform where all our infrastructure resources are provisioned.
 
 # Infrastruture setup
-
 ## Prerequisite
-You need an AWS account with the necessary authorization to generate resources such as EKS, VPC, subnets, ECR, and MySQL.
-Linux server with git, terraform and aws cli installed
+1. You need an AWS account with the necessary authorization to generate resources such as EKS, VPC, subnets, ECR, and MySQL.
+2. Linux server with git, terraform and aws cli installed
 
 # Steps to Reproduce this setup
 
-Step 1: Login to your device that has git, terraform and AWS CLI installed and configured.
+### Step 1: Login to your device that has git, terraform and AWS CLI installed and configured.
 Use the commands below to confirm that these are installed
+For Terraform
 ```
 terraform --version
 ```
+For aws cli
 ```
 aws --version
 ```
+Fot git
 ```
 git --version
 ```
-Step 2: Clone this repository to access the terraform files
+### Step 2: Clone this repository to access the terraform files
 ```
 git clone https://github.com/esthernnolum/terraform-eks-mysql.git
 ```
-Step 3: Initialize, Plan, and Apply terraform configuration within your project directory.
+### Step 3: Initialize, Plan, and Apply terraform configuration within your project directory.
 first cd in to the project folder:
 ```
 cd terraform-eks-mysql

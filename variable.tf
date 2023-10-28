@@ -13,8 +13,5 @@ variable "aws_access_key" {
 
 variable "availability_zones_count" {
   type = number
-}
-
-variable "ecr_name" {
-  type = string
+  default = 3
 }

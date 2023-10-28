@@ -4,22 +4,18 @@ resource "aws_eks_node_group" "node-group" {
   node_group_name = "mynode-group"
   node_role_arn   = aws_iam_role.node.arn
   subnet_ids      = var.private_subnet_id
-
   scaling_config {
     desired_size = 2
-    max_size     = 5
+    max_size     = 3
     min_size     = 1
   }
-
   ami_type       = "AL2_x86_64"
   capacity_type  = "ON_DEMAND"
   disk_size      = 20
   instance_types = ["t2.medium"]
-
   tags = {
      name = "mynode-group"
   }
-
   depends_on = [
     aws_iam_role_policy_attachment.node_AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.node_AmazonEKS_CNI_Policy,
@@ -27,15 +23,12 @@ resource "aws_eks_node_group" "node-group" {
   ]
 }
 
-
 # EKS Node IAM Role
 resource "aws_iam_role" "node" {
   name = "worker-role"
-
-  assume_role_policy = <<POLICY
-{
-  "Version": "2012-10-17",
-  "Statement": [
+  assume_role_policy = jsonencode({
+    "Version" = "2012-10-17"
+    "Statement": [
     {
       "Effect": "Allow",
       "Principal": {
@@ -44,8 +37,7 @@ resource "aws_iam_role" "node" {
       "Action": "sts:AssumeRole"
     }
   ]
-}
-POLICY
+  })
 }
 
 resource "aws_iam_role_policy_attachment" "node_AmazonEKSWorkerNodePolicy" {
@@ -63,20 +55,17 @@ resource "aws_iam_role_policy_attachment" "node_AmazonEC2ContainerRegistryReadOn
   role       = aws_iam_role.node.name
 }
 
-
 # EKS Node Security Group
 resource "aws_security_group" "eks_nodes" {
   name        = "mynode-sg"
   description = "Security group for all nodes in the cluster"
   vpc_id      = var.vpc_id
-
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
   tags = {
     environment                     = "mynode-sg"
     "kubernetes.io/cluster/cluster" = "owned"

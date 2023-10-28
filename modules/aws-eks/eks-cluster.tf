@@ -1,50 +1,42 @@
 # EKS Cluster
-resource "aws_ks_cluster_sg" "eks-cluster" {
+resource "aws_eks_cluster" "eks-cluster" {
   name     = "myeks-cluster"
   role_arn = aws_iam_role.cluster.arn
-
   vpc_config {
     subnet_ids              = flatten([var.public_subnet_id, var.private_subnet_id])
     endpoint_private_access = true
     endpoint_public_access  = true
     public_access_cidrs     = ["0.0.0.0/0"]
   }
-
   tags {
     name = "myeks-cluster"
   }
-
   depends_on = [
     aws_iam_role_policy_attachment.cluster_AmazonEKSClusterPolicy
   ]
 }
 
-
 # EKS Cluster IAM Role
 resource "aws_iam_role" "cluster" {
   name = "cluster-role"
-
-  assume_role_policy = <<POLICY
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
       "Effect": "Allow",
       "Principal": {
         "Service": "eks.amazonaws.com"
       },
       "Action": "sts:AssumeRole"
-    }
-  ]
-}
-POLICY
+      }
+    ]
+  })
 }
 
 resource "aws_iam_role_policy_attachment" "cluster_AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
   role       = aws_iam_role.cluster.name
 }
-
 
 # EKS Cluster Security Group
 resource "aws_security_group" "ks_cluster_sg" {
@@ -75,4 +67,19 @@ resource "aws_security_group_rule" "cluster_outbound" {
   source_security_group_id = aws_security_group.eks_nodes.id
   to_port                  = 65535
   type                     = "egress"
+}
+
+resource "aws_eks_cluster" "eks" {
+  name     = "pc-eks"
+  role_arn = aws_iam_role.master.arn
+  vpc_config {
+    subnet_ids = [aws_subnet.public-1.id, aws_subnet.public-2.id]
+  }
+  depends_on = [
+    aws_iam_role_policy_attachment.AmazonEKSClusterPolicy,
+    aws_iam_role_policy_attachment.AmazonEKSServicePolicy,
+    aws_iam_role_policy_attachment.AmazonEKSVPCResourceController,
+    aws_iam_role_policy_attachment.AmazonEKSVPCResourceController,
+  ]
+
 }

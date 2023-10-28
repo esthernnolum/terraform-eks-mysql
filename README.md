@@ -2,7 +2,7 @@
 
 # Infrastruture diagram for the setup
 
-![alt text](https://github.com/esthernnolum/terraform-eks-mysql/blob/main/infra-diagram.jpg?raw=true)
+![alt text](https://github.com/esthernnolum/terraform-eks-mysql/blob/main/infra-diagram.png?raw=true)
 
 
 # Infrastruture setup

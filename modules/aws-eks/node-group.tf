@@ -2,15 +2,10 @@ resource "aws_eks_node_group" "node-grp" {
   cluster_name    = aws_eks_cluster.eks.name
   node_group_name = "pc-node-group"
   node_role_arn   = aws_iam_role.worker.arn
-  subnet_ids      = [aws_subnet.public-1.id, aws_subnet.public-2.id]
+  subnet_ids      = slice(var.public_subnet_id, 0, 2)  # Selects the first 2 subnets
   capacity_type   = "ON_DEMAND"
   disk_size       = "20"
   instance_types  = ["t2.small"]
-
-  remote_access {
-    ec2_ssh_key               = "ubuntusingapore"
-    source_security_group_ids = [aws_security_group.allow_tls.id]
-  }
 
   labels = tomap({ env = "dev" })
 

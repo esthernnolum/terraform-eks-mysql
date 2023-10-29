@@ -46,6 +46,9 @@ Run the below command to get the Terraform project initialized.
 ```
 terraform init
 ```
+output:
+![alt text](https://github.com/esthernnolum/terraform-eks-mysql/blob/main/terraform-init.png?raw=true)
+
 To review the changes that will occur when creating resources, use the following command:
 ```
 terraform plan

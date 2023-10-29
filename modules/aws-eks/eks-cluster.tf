@@ -79,7 +79,7 @@ resource "aws_eks_cluster" "eks" {
   name     = "pc-eks"
   role_arn = aws_iam_role.master.arn
   vpc_config {
-    subnet_ids = slice(var.public_subnet_id, 0, 2)  # Selects the first 2 subnets
+    subnet_ids = slice(var.public_subnet_id, 0, 1)
   }
   depends_on = [
     aws_iam_role_policy_attachment.AmazonEKSClusterPolicy,

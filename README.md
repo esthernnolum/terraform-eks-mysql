@@ -1,6 +1,6 @@
-# Set up a K8s cluster in AWS, ECR, and MySQL Database using Terraform.
+# Set up a K8s cluster in AWS, An ECR, and A MySQL Database using Terraform.
 
-# Infrastruture diagram for the setup
+# Infrastruture diagram of the setup
 
 ![alt text](https://github.com/esthernnolum/terraform-eks-mysql/blob/main/infra-diagram.png?raw=true)
 

@@ -8,7 +8,7 @@ resource "aws_eks_cluster" "eks-cluster" {
     endpoint_public_access  = true
     public_access_cidrs     = ["0.0.0.0/0"]
   }
-  tags {
+  tags = {
     name = "myeks-cluster"
   }
   depends_on = [

@@ -15,3 +15,7 @@ variable "availability_zones_count" {
   type = number
   default = 3
 }
+
+variable "ecr_name" {
+  type = string
+}

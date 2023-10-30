@@ -13,5 +13,5 @@ variable "mydbinstance_password" {
   default     = "admin" # input your password here
 }
 variable "db-sg-id" {
-  type = list(string)
+  #type = list(string)
 }
